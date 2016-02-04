@@ -76,6 +76,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IntDir>..\..\intermediate\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>..\..\bin\$(Platform)\VS2015\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -84,6 +85,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IntDir>..\..\intermediate\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>..\..\bin\$(Platform)\VS2015\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
