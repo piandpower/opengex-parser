@@ -1,3 +1,13 @@
 /intermediate/
 
 /**/.vs/
+/**/ipch/
+
+
+*.pdb
+*.opendb
+*.sdf
+
+*.ilk
+*.pdb
+*.exp

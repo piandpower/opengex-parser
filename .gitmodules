@@ -1,0 +1,3 @@
+[submodule "thirdparty/openddl-parser"]
+	path = thirdparty/openddl-parser
+	url = ../openddl-parser.git
