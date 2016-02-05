@@ -8,6 +8,8 @@ namespace OGEXParser
 	class DLL_OPENGEXPARSER_EXPORT GeometryNode : public NodeStructe
 	{
 	public:
-		std::vector<std::string> MaterialRefNames;
+		virtual void processSubNode(ODDLParser::DDLNode* node) override;
+	public:
+		std::vector<std::string> materialRefNames;
 	};
 }

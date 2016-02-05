@@ -3,5 +3,9 @@
 
 namespace OGEXParser
 {
+	void GeometryObject::processSubNode(ODDLParser::DDLNode* node)
+	{
+
+	}
 
 }

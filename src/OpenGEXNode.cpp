@@ -22,6 +22,9 @@ namespace OGEXParser
 
 	void NodeStructe::processSubNode(ODDLParser::DDLNode* node)
 	{
+		if (!node)
+			return;
+
 		std::string tokenType = node->getType();
 		if (tokenType == "Transform")
 		{

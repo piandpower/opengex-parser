@@ -23,6 +23,16 @@ namespace OGEXParser
 		UAD_Z
 	};
 
+	enum PrimitiveType
+	{
+		PT_Points = 0,
+		PT_Lines,
+		PT_LineStrip,
+		PT_Triangles,
+		PT_TriangleStrip,
+		PT_Quads
+	};
+
 	template<typename T>
 	class Vector2DT
 	{
