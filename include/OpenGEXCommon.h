@@ -12,3 +12,5 @@
 #else
 #   define DLL_OPENGEXPARSER_EXPORT
 #endif // _WIN32
+
+#include <string>

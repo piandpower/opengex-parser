@@ -5,6 +5,8 @@
 
 namespace OGEXParser
 {
+	class Structure;
+
 	class DLL_OPENGEXPARSER_EXPORT OpenGEXDataSummary
 	{
 		friend class OpenGEXParser;
@@ -17,5 +19,8 @@ namespace OGEXParser
 		float angleScale;
 		float timeScale;
 		int32 upDirection; // UpAxisDirection enum
+
+	protected:
+		std::vector<Structure*> allStructures;   // almost everything stored here
 	};
 }

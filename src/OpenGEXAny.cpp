@@ -6,35 +6,35 @@ namespace OGEXParser
 	Any::AnyEmpty Any::Null;
 
 	Any::Any() :
-		mContent(nullptr)
+		content(nullptr)
 	{
 	}
 
 	Any::Any(const Any::AnyEmpty& value) :
-		mContent(nullptr)
+		content(nullptr)
 	{
 	}
 
 	Any::Any(const Any& other) :
-		mContent(other.mContent ? other.mContent->clone() : nullptr)
+		content(other.content ? other.content->clone() : nullptr)
 	{
 	}
 
 	Any::~Any()
 	{
-		delete mContent;
+		delete content;
 	}
 
 	Any& Any::swap(Any& rhs)
 	{
-		std::swap(mContent, rhs.mContent);
+		std::swap(content, rhs.content);
 		return *this;
 	}
 
 	Any& Any::operator = (const Any::AnyEmpty& rhs)
 	{
-		delete mContent;
-		mContent = nullptr;
+		delete content;
+		content = nullptr;
 		return *this;
 	}
 
@@ -46,17 +46,17 @@ namespace OGEXParser
 
 	bool Any::empty() const
 	{
-		return !mContent;
+		return !content;
 	}
 
 	const std::type_info& Any::getType() const
 	{
-		return mContent ? mContent->getType() : typeid(void);
+		return content ? content->getType() : typeid(void);
 	}
 
 	void* Any::castUnsafe() const
 	{
-		return mContent ? static_cast<Any::Holder<void*> *>(this->mContent)->held : nullptr;
+		return content ? static_cast<Any::Holder<void*> *>(this->content)->held : nullptr;
 	}
 
 } // namespace MyGUI

@@ -19,7 +19,7 @@ namespace OGEXParser
 
 		template<typename ValueType>
 		Any(const ValueType& value) :
-			mContent(new Holder<ValueType>(value))
+			content(new Holder<ValueType>(value))
 		{
 		}
 
@@ -45,7 +45,7 @@ namespace OGEXParser
 		ValueType* castType() const
 		{
 			if (this->getType() == typeid(ValueType))
-				return &static_cast<Any::Holder<ValueType> *>(this->mContent)->held;
+				return &static_cast<Any::Holder<ValueType> *>(this->content)->held;
 			return nullptr;
 		}
 
@@ -91,7 +91,7 @@ namespace OGEXParser
 		};
 
 	private:
-		Placeholder* mContent;
+		Placeholder* content;
 	};
 
 }

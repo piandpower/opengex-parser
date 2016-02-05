@@ -1,5 +1,5 @@
 #include "OpenGEXPCH.h"
-#include "OpenGEXStructure.h"
+#include "OpenGEXStructureCollection.h"
 
 namespace OGEXParser
 {

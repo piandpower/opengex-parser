@@ -1,6 +1,9 @@
 #pragma once
 
 #include "OpenGEXCommon.h"
+#include "OpenGEXStructureCollection.h"
+#include "OpenGEXNodeCollection.h"
+#include "OpenGEXObjectCollection.h"
 #include "OpenGEXDataSummary.h"
 
 namespace ODDLParser {
