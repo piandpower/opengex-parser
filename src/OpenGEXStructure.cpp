@@ -7,7 +7,7 @@ namespace OGEXParser
 	{
 		std::string tokenType = node->getType();
 
-		if (tokenType == "name")
+		if (tokenType == "Name")
 		{
 			name = node->getValue()->getString();
 		}

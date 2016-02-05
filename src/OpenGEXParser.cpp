@@ -132,7 +132,7 @@ namespace OGEXParser
 	bool OpenGEXParser::parse(const char* buffer, int32 len)
 	{
 		delete dataSummary;
-		dataSummary = nullptr;
+		dataSummary = new OpenGEXDataSummary();
 		dImpl->context = false;
 
 		if (!buffer)
@@ -159,11 +159,11 @@ namespace OGEXParser
 			std::string tokenType = (*iter)->getType();
 			if (tokenType == "Metric")
 			{
-				processMetricNode(node);
+				processMetricNode(*iter);
 			}
 			else if (tokenType == "GeometryNode")
 			{
-				processGeometryNode(node);
+				processGeometryNode(*iter);
 			}
 		}
 	}
@@ -182,49 +182,58 @@ namespace OGEXParser
 			if (!prop->m_key)
 				continue;
 
+			Value* nodeValue = node->getValue();
+			if (!nodeValue)
+				continue;
+
 			Text& keyText = *prop->m_key;
-			if (keyText == Grammar::Metric_DistanceType)
+			if (keyText == "key")
 			{
-				if (prop->m_value->m_type == Value::ddl_float)
+				std::string keyValue = prop->m_value->getString();
+				if (keyValue == Grammar::Metric_DistanceType)
 				{
-					dataSummary->distanceScale = prop->m_value->getFloat();
-				}
-			}
-			else if (keyText == Grammar::Metric_AngleType)
-			{
-				if (prop->m_value->m_type == Value::ddl_float)
-				{
-					dataSummary->angleScale = prop->m_value->getFloat();
-				}
-			}
-			else if (keyText == Grammar::Metric_TimeType)
-			{
-				if (prop->m_value->m_type == Value::ddl_float)
-				{
-					dataSummary->timeScale = prop->m_value->getFloat();
-				}
-			}
-			else if (keyText == Grammar::Metric_UpType)
-			{
-				if (prop->m_value->m_type == Value::ddl_string)
-				{
-					std::string upDirStr = prop->m_value->getString();
-					int32 upDirV = UAD_Z;
-					if (upDirStr == "x")
+					if (nodeValue->m_type == Value::ddl_float)
 					{
-						upDirStr = UAD_X;
+						dataSummary->distanceScale = nodeValue->getFloat();
 					}
-					else if (upDirStr == "y")
+				}
+				else if (keyValue == Grammar::Metric_AngleType)
+				{
+					if (nodeValue->m_type == Value::ddl_float)
 					{
-						upDirStr = UAD_Y;
+						dataSummary->angleScale = nodeValue->getFloat();
 					}
-					else if (upDirStr == "z")
+				}
+				else if (keyValue == Grammar::Metric_TimeType)
+				{
+					if (nodeValue->m_type == Value::ddl_float)
 					{
-						upDirStr = UAD_Z;
+						dataSummary->timeScale = nodeValue->getFloat();
 					}
-					dataSummary->upDirection = upDirV;
+				}
+				else if (keyValue == Grammar::Metric_UpType)
+				{
+					if (nodeValue->m_type == Value::ddl_string)
+					{
+						std::string upDirStr = nodeValue->getString();
+						int32 upDirV = UAD_Z;
+						if (upDirStr == "x")
+						{
+							upDirStr = UAD_X;
+						}
+						else if (upDirStr == "y")
+						{
+							upDirStr = UAD_Y;
+						}
+						else if (upDirStr == "z")
+						{
+							upDirStr = UAD_Z;
+						}
+						dataSummary->upDirection = upDirV;
+					}
 				}
 			}
+
 
 			prop = prop->m_next;
 		}
@@ -233,9 +242,6 @@ namespace OGEXParser
 	void OpenGEXParser::processGeometryNode(ODDLParser::DDLNode* node)
 	{
 		if (node == nullptr || dImpl->context == nullptr)
-			return;
-
-		if (node->getParent())
 			return;
 
 		GeometryNode* geometryNode = static_cast<GeometryNode*>(createStructure(node->getType()));
