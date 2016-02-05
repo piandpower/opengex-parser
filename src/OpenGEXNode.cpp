@@ -35,6 +35,15 @@ namespace OGEXParser
 				setMatrix(this, transformData);
 			}
 		}
+		else if (tokenType == "ObjectRef")
+		{
+			Reference* refValue = node->getReferences();
+			if (refValue)
+			{
+				Text* refId = refValue->m_referencedName[0]->m_id;
+				objectRefName.assign(refId->m_buffer, refId->m_len);
+			}
+		}
 		else
 		{
 			Structure::processSubNode(node);

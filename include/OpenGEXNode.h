@@ -11,6 +11,8 @@ namespace OGEXParser
 	public:
 		void processSubNode(ODDLParser::DDLNode* node);
 	public:
+		std::string objectRefName;
+
 		Matrix transform;
 	};
 }
