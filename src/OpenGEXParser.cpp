@@ -1,8 +1,5 @@
 #include "OpenGEXPCH.h"
 #include "OpenGEXParser.h"
-#include "openddlparser/OpenDDLParser.h"
-
-USE_ODDLPARSER_NS
 
 namespace Grammar {
 	static const std::string MetricType = "Metric";
@@ -159,14 +156,14 @@ namespace OGEXParser
 		DDLNode::DllNodeList childNodes = node->getChildNodeList();
 		for (DDLNode::DllNodeList::iterator iter = childNodes.begin(); iter != childNodes.end(); ++iter)
 		{
-			Grammar::TokenType tokenType(Grammar::matchTokenType((*iter)->getType().c_str()));
-			switch (tokenType)
+			std::string tokenType = (*iter)->getType();
+			if (tokenType == "Metric")
 			{
-			case Grammar::MetricKeyToken:
-			{
-				processMetricNode(*iter);
+				processMetricNode(node);
 			}
-			break;
+			else if (tokenType == "GeometryNode")
+			{
+				processGeometryNode(node);
 			}
 		}
 	}
@@ -231,6 +228,52 @@ namespace OGEXParser
 
 			prop = prop->m_next;
 		}
+	}
+
+	void OpenGEXParser::processGeometryNode(ODDLParser::DDLNode* node)
+	{
+		if (node == nullptr || dImpl->context == nullptr)
+			return;
+
+		if (node->getParent())
+			return;
+
+		GeometryNode* geometryNode = static_cast<GeometryNode*>(createStructure(node->getType()));
+		if (geometryNode)
+		{
+			DDLNode::DllNodeList childNodes = node->getChildNodeList();
+			for (DDLNode::DllNodeList::iterator iter = childNodes.begin(); iter != childNodes.end(); ++iter)
+			{
+				geometryNode->processSubNode(*iter);
+			}
+		}
+	}
+
+	Structure* OpenGEXParser::createStructure(const std::string& identifier)
+	{
+		Structure* newStructure = nullptr;
+
+		if (identifier == "GeometryNode")
+		{
+			newStructure = new GeometryNode();
+
+		}
+		else if (identifier == "GeometryObject")
+		{
+			newStructure = new GeometryObject();
+		}
+
+		if (newStructure)
+		{
+			pushStrutureToDataSummary(newStructure);
+		}
+
+		return newStructure;
+	}
+
+	void OpenGEXParser::pushStrutureToDataSummary(Structure* inStruture)
+	{
+		dataSummary->allStructures.push_back(inStruture);
 	}
 
 }

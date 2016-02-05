@@ -6,11 +6,6 @@
 #include "OpenGEXObjectCollection.h"
 #include "OpenGEXDataSummary.h"
 
-namespace ODDLParser {
-	class DDLNode;
-	struct Context;
-}
-
 namespace OGEXParser
 {
 	class DLL_OPENGEXPARSER_EXPORT OpenGEXParser
@@ -28,6 +23,12 @@ namespace OGEXParser
 		void processNodes(ODDLParser::DDLNode* node);
 
 		void processMetricNode(ODDLParser::DDLNode* node);
+
+		void processGeometryNode(ODDLParser::DDLNode* node);
+
+		Structure* createStructure(const std::string& identifier);
+
+		void pushStrutureToDataSummary(Structure* inStruture);
 
 	protected:
 		OpenGEXDataSummary* dataSummary;

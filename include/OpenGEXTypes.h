@@ -98,4 +98,5 @@ namespace OGEXParser
 	typedef Vector2DT<float> Vector2D;
 	typedef Vector3DT<float> Vector3D;
 	typedef Vector4DT<float> Vector4D;
+	typedef MatrixT<float> Matrix;
 }

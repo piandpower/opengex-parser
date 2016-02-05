@@ -127,8 +127,8 @@
       <ImportLibrary>..\..\lib\$(Platform)\VS2015\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(TargetPath) $(ProjectDir)\..\..\..\..\..\..\Binaries\Win64\
-copy $(TargetDir)\$(TargetName).pdb $(ProjectDir)\..\..\..\..\..\..\Binaries\Win64\</Command>
+      <Command>copy $(TargetPath) $(ProjectDir)\..\..\..\..\..\..\Binaries\Win64\ /y
+copy $(TargetDir)\$(TargetName).pdb $(ProjectDir)\..\..\..\..\..\..\Binaries\Win64\ /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -173,8 +173,8 @@ copy $(TargetDir)\$(TargetName).pdb $(ProjectDir)\..\..\..\..\..\..\Binaries\Win
       <ImportLibrary>..\..\lib\$(Platform)\VS2015\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(TargetPath) $(ProjectDir)\..\..\..\..\..\..\Binaries\Win64\
-copy $(TargetDir)\$(TargetName).pdb $(ProjectDir)\..\..\..\..\..\..\Binaries\Win64\</Command>
+      <Command>copy $(TargetPath) $(ProjectDir)\..\..\..\..\..\..\Binaries\Win64\ /y
+copy $(TargetDir)\$(TargetName).pdb $(ProjectDir)\..\..\..\..\..\..\Binaries\Win64\ /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #include "OpenGEXPCH.h"
 #include "OpenGEXDataSummary.h"
+#include "OpenGEXStructure.h"
 
 namespace OGEXParser
 {
@@ -13,7 +14,12 @@ namespace OGEXParser
 
 	OpenGEXDataSummary::~OpenGEXDataSummary()
 	{
+		for (size_t i = 0; i < allStructures.size(); ++i)
+		{
+			delete allStructures[i];
+		}
 
+		allStructures.clear();
 	}
 
 }

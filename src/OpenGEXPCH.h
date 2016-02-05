@@ -5,3 +5,7 @@
 #include <string>
 
 #include "OpenGEXCommon.h"
+
+#include "openddlparser/OpenDDLParser.h"
+
+USE_ODDLPARSER_NS

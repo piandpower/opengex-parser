@@ -5,5 +5,9 @@
 
 namespace OGEXParser
 {
+	class DLL_OPENGEXPARSER_EXPORT MaterialStructure : public Structure
+	{
+	public:
 
+	};
 }

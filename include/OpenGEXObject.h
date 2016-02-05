@@ -5,9 +5,8 @@
 
 namespace OGEXParser
 {
-	class DLL_OPENGEXPARSER_EXPORT Object
+	class DLL_OPENGEXPARSER_EXPORT ObjectStructure : public Structure
 	{
 	public:
-		~Object() {}
 	};
 }

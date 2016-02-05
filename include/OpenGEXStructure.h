@@ -9,6 +9,7 @@ namespace OGEXParser
 	public:
 		virtual ~Structure() {}
 
+		virtual void processSubNode(ODDLParser::DDLNode* node);
 	public:
 		std::string name;
 	};

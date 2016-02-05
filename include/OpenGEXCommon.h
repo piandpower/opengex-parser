@@ -14,3 +14,9 @@
 #endif // _WIN32
 
 #include <string>
+#include <vector>
+
+namespace ODDLParser {
+	class DDLNode;
+	struct Context;
+}

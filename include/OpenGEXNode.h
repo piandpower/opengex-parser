@@ -9,6 +9,8 @@ namespace OGEXParser
 	class DLL_OPENGEXPARSER_EXPORT NodeStructe : public Structure
 	{
 	public:
-
+		void processSubNode(ODDLParser::DDLNode* node);
+	public:
+		Matrix transform;
 	};
 }
