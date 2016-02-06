@@ -1,6 +1,7 @@
 #pragma once
 
 #include "OpenGEXCommon.h"
+#include "OpenGEXTypes.h"
 
 namespace OGEXParser
 {
