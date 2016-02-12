@@ -131,9 +131,13 @@ namespace OGEXParser
 
 	bool OpenGEXParser::parse(const char* buffer, int32 len)
 	{
-		delete dataSummary;
+		if (dataSummary)
+		{
+			delete dataSummary;
+			dataSummary = nullptr;
+		}
 		dataSummary = new OpenGEXDataSummary();
-		dImpl->context = false;
+		dImpl->context = nullptr;
 
 		if (!buffer)
 			return false;
