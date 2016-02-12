@@ -1,8 +1,15 @@
 #include "OpenGEXPCH.h"
 #include "OpenGEXNodeCollection.h"
+#include "OpenGEXDataSummary.h"
+#include "OpenGEXObjectCollection.h"
 
 namespace OGEXParser
 {
+
+	GeometryNode::GeometryNode()
+	{
+		geometryObject = nullptr;
+	}
 
 	void GeometryNode::processSubNode(ODDLParser::DDLNode* node)
 	{
@@ -34,6 +41,25 @@ namespace OGEXParser
 		{
 			NodeStructe::processSubNode(node);
 		}
+	}
+
+	void GeometryNode::updateReference(class OpenGEXDataSummary* dataSummary)
+	{
+		if (!objectRefName.empty())
+		{
+			for (size_t i = 0; i < dataSummary->allObjects.size(); ++i)
+			{
+				ObjectStructure* objectStructure = dataSummary->allObjects[i];
+				GeometryObject* inGeometryObject = dynamic_cast<GeometryObject*>(objectStructure);
+				if (inGeometryObject && objectRefName == inGeometryObject->name)
+				{
+					geometryObject = inGeometryObject;
+					break;
+				}
+			}
+		}
+
+
 	}
 
 }

@@ -131,11 +131,8 @@ namespace OGEXParser
 
 	bool OpenGEXParser::parse(const char* buffer, int32 len)
 	{
-		if (dataSummary)
-		{
-			delete dataSummary;
-			dataSummary = nullptr;
-		}
+		clear();
+
 		dataSummary = new OpenGEXDataSummary();
 		dImpl->context = nullptr;
 
@@ -150,7 +147,27 @@ namespace OGEXParser
 		dImpl->context = openDDLParser.getContext();
 		processNodes(openDDLParser.getRoot());
 
+		updateReference();
+
 		return true;
+	}
+
+	void OpenGEXParser::clear()
+	{
+		if (dataSummary)
+		{
+			delete dataSummary;
+			dataSummary = nullptr;
+		}
+	}
+
+	void OpenGEXParser::updateReference()
+	{
+		for (size_t i = 0; i < dataSummary->allNodes.size(); ++i)
+		{
+			NodeStructe* nodeStructure = dataSummary->allNodes[i];
+			nodeStructure->updateReference(dataSummary);
+		}
 	}
 
 	void OpenGEXParser::processNodes(ODDLParser::DDLNode* node)
@@ -277,13 +294,36 @@ namespace OGEXParser
 		{
 			pushStrutureToDataSummary(newStructure);
 		}
+		NodeStructe* newNodeStructure = dynamic_cast<NodeStructe*>(newStructure);
+		if (newNodeStructure)
+		{
+			pushNodeToDataSummary(newNodeStructure);
+		}
+		else
+		{
+			ObjectStructure* newObjectStructure = dynamic_cast<ObjectStructure*>(newStructure);
+			if (newObjectStructure)
+			{
+				pushObjectToDataSummary(newObjectStructure);
+			}
+		}
 
 		return newStructure;
 	}
 
-	void OpenGEXParser::pushStrutureToDataSummary(Structure* inStruture)
+	void OpenGEXParser::pushStrutureToDataSummary(Structure* newStruture)
 	{
-		dataSummary->allStructures.push_back(inStruture);
+		dataSummary->allStructures.push_back(newStruture);
+	}
+
+	void OpenGEXParser::pushNodeToDataSummary(NodeStructe* newNodeStructure)
+	{
+		dataSummary->allNodes.push_back(newNodeStructure);
+	}
+
+	void OpenGEXParser::pushObjectToDataSummary(ObjectStructure* newObjectStructure)
+	{
+		dataSummary->allObjects.push_back(newObjectStructure);
 	}
 
 }

@@ -6,6 +6,8 @@
 namespace OGEXParser
 {
 	class Structure;
+	class NodeStructe;
+	class ObjectStructure;
 
 	class DLL_OPENGEXPARSER_EXPORT OpenGEXDataSummary
 	{
@@ -20,7 +22,11 @@ namespace OGEXParser
 		float timeScale;
 		int32 upDirection; // UpAxisDirection enum
 
-	protected:
+	public:
 		std::vector<Structure*> allStructures;   // almost everything stored here
+
+		std::vector<NodeStructe*> allNodes;
+
+		std::vector<ObjectStructure*> allObjects;
 	};
 }

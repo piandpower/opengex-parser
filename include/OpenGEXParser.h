@@ -19,7 +19,11 @@ namespace OGEXParser
 
 		OpenGEXDataSummary* getDataSummary() { return dataSummary; }
 
+		void clear();
+
 	protected:
+		void updateReference();
+
 		void processNodes(ODDLParser::DDLNode* node);
 
 		void processMetricNode(ODDLParser::DDLNode* node);
@@ -28,7 +32,11 @@ namespace OGEXParser
 
 		Structure* createStructure(const std::string& identifier);
 
-		void pushStrutureToDataSummary(Structure* inStruture);
+		void pushStrutureToDataSummary(Structure* newStruture);
+
+		void pushNodeToDataSummary(NodeStructe* newNodeStructure);
+
+		void pushObjectToDataSummary(ObjectStructure* newObjectStructure);
 
 	protected:
 		OpenGEXDataSummary* dataSummary;

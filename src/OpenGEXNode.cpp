@@ -53,4 +53,9 @@ namespace OGEXParser
 		}
 	}
 
+	void NodeStructe::updateReference(class OpenGEXDataSummary* dataSummary)
+	{
+
+	}
+
 }

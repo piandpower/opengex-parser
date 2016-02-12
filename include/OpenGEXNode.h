@@ -10,6 +10,8 @@ namespace OGEXParser
 	{
 	public:
 		void processSubNode(ODDLParser::DDLNode* node);
+
+		virtual void updateReference(class OpenGEXDataSummary* dataSummary);
 	public:
 		std::string objectRefName;
 
